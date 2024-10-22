@@ -1,16 +1,5 @@
 from src.controller import Controller
-
-
-def request_product_name():
-    return input("Введите название товара: ")
-
-
-def request_product_price():
-    return float(input("Введите цену товара: "))
-
-
-def request_product_quantity():
-    return int(input("Введите количество товара: "))
+from src.data_input import request_product_name, request_product_quantity, request_product_data_and_quantity
 
 
 def main():
@@ -19,10 +8,8 @@ def main():
         print("1. Добавить товар\n2. Просмотреть товары\n3. Купить товар\n4. Просмотреть корзину\n5. Выйти")
         choice = input("Выберите действие: ")
         if choice == "1":
-            name = request_product_name()
-            price = request_product_price()
-            quantity = request_product_quantity()
-            controller.add_product(name, price, quantity)
+            product_data, quantity = request_product_data_and_quantity()
+            controller.add_product(product_data, quantity)
         elif choice == "2":
            controller.display_store_products()
         elif choice == "3":

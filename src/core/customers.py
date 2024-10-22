@@ -1,5 +1,5 @@
 from src.core.carts import Cart
-from src.core.products import Product
+from src.core.products.abstract import Product
 from src.core.store import Store
 
 

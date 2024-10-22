@@ -1,4 +1,4 @@
-from src.core.products import Product
+from src.core.products.abstract import Product
 from src.utils.singleton import SingletonMeta
 
 
@@ -7,10 +7,9 @@ class Store(metaclass=SingletonMeta):
     def __init__(self):
         self.inventory = {}
 
-    def add_product(self, name: str, price: float, quantity: int):
+    def add_product(self, product: Product, quantity: int):
         # TODO проверить, что ещё не существует
-        product = Product(name, price)
-        self.inventory[name] = {"product": product, "quantity": quantity}
+        self.inventory[product.name] = {"product": product, "quantity": quantity}
 
     def get_product(self, name: str) -> Product | None:
         return self.inventory.get(name, {}).get("product")
