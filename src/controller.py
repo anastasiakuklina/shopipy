@@ -1,3 +1,5 @@
+from result import Result, Err, Ok
+
 from src.core.customers import Customer
 from src.core.events.observers import CustomerNotifier
 from src.core.products.abstract import IProduct
@@ -17,18 +19,15 @@ class Controller:
         product = ClothingProductFactory().create_product("jeans", 1000, cloth_params)
         self.store.add_product(product, 5)
 
-    def add_product(self, product_data: ProductData, quantity: int):
-
+    def add_product(self, product_data: ProductData, quantity: int) -> Result[IProduct, str]:
         match product_data.typ:
             case ProductEnum.clothing:
                 product = ClothingProductFactory().create_product(product_data.name, product_data.price, product_data.params)
             case ProductEnum.appliance:
                 product = ApplianceProductFactory().create_product(product_data.name, product_data.price, product_data.params)
             case _:
-                product = None
-        if not product:
-            return False
-        self.store.add_product(product, quantity)
+                return Err("Нет фабричного метода для этого продукта")
+        return self.store.add_product(product, quantity)
 
     def add_clothing_product(self, name: str, price: float, clothing_params: ClothingParams, quantity: int):
         product = ClothingProductFactory().create_product(name, price, params=clothing_params)
@@ -37,17 +36,18 @@ class Controller:
     def display_store_products(self):
         self.store.display_products()
 
-    def buy_product(self, name: str, quantity: int):
+    def buy_product(self, name: str, quantity: int) -> Result[None, str]:
         product = self.store.get_product(name)
         if not product:
-            raise Exception("Такого продукта не существует")
-        self.customer.buy_product(product, quantity)
+            return Err("Такого продукта не существует")
+        return self.customer.buy_product(product, quantity)
 
-    def add_quantity(self, name: str, quantity: int):
+    def add_quantity(self, name: str, quantity: int) -> Result[None, str]:
         product = self.store.get_product(name)
         if not product:
-            raise Exception("Такого продукта не существует")
+            return Err("Такого продукта не существует")
         self.store.add_quantity(product, quantity)
+        return Ok(None)
 
 
     def display_cart(self):

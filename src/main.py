@@ -1,3 +1,5 @@
+from result import is_ok, is_err
+
 from src.controller import Controller
 from src.data_input import request_product_name, request_product_quantity, request_product_data_and_quantity
 
@@ -10,19 +12,22 @@ def main():
         choice = input("Выберите действие: ")
         if choice == "1":
             product_data, quantity = request_product_data_and_quantity()
-            controller.add_product(product_data, quantity)
+            res = controller.add_product(product_data, quantity)
+            print(res.err_value) if is_err(res) else None
         elif choice == "2":
            controller.display_store_products()
         elif choice == "3":
             name = request_product_name()
             quantity = request_product_quantity()
-            controller.buy_product(name, quantity)
+            res = controller.buy_product(name, quantity)
+            print(res.err_value) if is_err(res) else None
         elif choice == "4":
             controller.display_cart()
         elif choice == "5":
             name = request_product_name()
             quantity = request_product_quantity()
-            controller.add_quantity(name, quantity)
+            res = controller.add_quantity(name, quantity)
+            print(res.err_value) if is_err(res) else None
         elif choice == "6":
             break
         else:

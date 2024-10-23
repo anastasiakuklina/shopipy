@@ -1,3 +1,5 @@
+from result import Err, Result, Ok
+
 from src.core.events.abstract_publicator import IPublicator
 from src.core.events.events import BaseEvent, ProductRestockedEvent
 from src.core.events.observers import IObserver
@@ -11,9 +13,11 @@ class Store(IPublicator):
         self.inventory = {}
         self.observers = []
 
-    def add_product(self, product: IProduct, quantity: int):
-        # TODO проверить, что ещё не существует
+    def add_product(self, product: IProduct, quantity: int) -> Result[None, str]:
+        if  product.name in self.inventory:
+            return Err("Такой продукт уже есть в магазине")
         self.inventory[product.name] = {"product": product, "quantity": quantity}
+        return Ok(None)
 
     def get_product(self, name: str) -> IProduct | None:
         return self.inventory.get(name, {}).get("product")

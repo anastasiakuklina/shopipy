@@ -62,6 +62,6 @@ def request_product_data_and_quantity() -> tuple[ProductData, int]:
         case ProductEnum.appliance:
             params = request_appliance_info()
         case _:
-            raise Exception("Unknown product type")
+            raise Exception("Неизвестный тип продукта")
     quantity = request_product_quantity()
     return ProductData(typ, name, price, params), quantity
