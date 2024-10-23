@@ -1,8 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
-from itertools import product
 
-from src.core.products.abstract import Product
 from src.core.products.appliance import ApplianceParams
 from src.core.products.clothing import ClothingParams
 
@@ -36,8 +34,6 @@ def request_product_type() -> ProductEnum:
     while True:
         try:
             product_type = int(input(f"Выберите тип товара: {ProductEnum.clothing.value} одежда, {ProductEnum.appliance.value} техника: "))
-            print(product_type)
-            print(ProductEnum(product_type))
 
             return ProductEnum(product_type)
         except ValueError:
@@ -57,8 +53,9 @@ def request_appliance_info() -> ApplianceParams:
 
 
 def request_product_data_and_quantity() -> tuple[ProductData, int]:
+    name = request_product_name()
+    price = request_product_price()
     typ = request_product_type()
-    print(typ)
     match typ:
         case ProductEnum.clothing:
             params = request_clothing_info()
@@ -66,7 +63,5 @@ def request_product_data_and_quantity() -> tuple[ProductData, int]:
             params = request_appliance_info()
         case _:
             raise Exception("Unknown product type")
-    name = request_product_name()
-    price = request_product_price()
     quantity = request_product_quantity()
     return ProductData(typ, name, price, params), quantity

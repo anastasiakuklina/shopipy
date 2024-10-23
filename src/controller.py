@@ -1,5 +1,6 @@
 from src.core.customers import Customer
-from src.core.products.abstract import Product
+from src.core.events.observers import CustomerNotifier
+from src.core.products.abstract import IProduct
 from src.core.products.appliance import ApplianceProductFactory
 from src.core.products.clothing import ClothingProductFactory, ClothingParams
 from src.core.store import Store
@@ -11,12 +12,13 @@ class Controller:
     def __init__(self):
         self.store = Store()
         self.customer = Customer("John", self.store)
+        self.store.attach(CustomerNotifier())
         cloth_params = ClothingParams("S", "jeans")
         product = ClothingProductFactory().create_product("jeans", 1000, cloth_params)
         self.store.add_product(product, 5)
-        # self.store.add_product("apple", 100, 20)
 
     def add_product(self, product_data: ProductData, quantity: int):
+
         match product_data.typ:
             case ProductEnum.clothing:
                 product = ClothingProductFactory().create_product(product_data.name, product_data.price, product_data.params)
@@ -38,9 +40,15 @@ class Controller:
     def buy_product(self, name: str, quantity: int):
         product = self.store.get_product(name)
         if not product:
-            print("Такого продукта не существует")
-            return
+            raise Exception("Такого продукта не существует")
         self.customer.buy_product(product, quantity)
+
+    def add_quantity(self, name: str, quantity: int):
+        product = self.store.get_product(name)
+        if not product:
+            raise Exception("Такого продукта не существует")
+        self.store.add_quantity(product, quantity)
+
 
     def display_cart(self):
         self.customer.display_cart()

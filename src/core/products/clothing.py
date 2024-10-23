@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.core.products.abstract import Product, ProductFactory
+from src.core.products.abstract import IProduct, IProductFactory
 
 
 @dataclass
@@ -9,7 +9,7 @@ class ClothingParams:
     color: str
 
 
-class ClothingProduct(Product):
+class ClothingProduct(IProduct):
 
     def __init__(self, name: str, price: float, size: str, color: str):
         super().__init__(name, price)
@@ -20,7 +20,7 @@ class ClothingProduct(Product):
         return f"{self.name} {self.price} руб. размер: {self.size} цвет: {self.color}"
 
 
-class ClothingProductFactory(ProductFactory):
+class ClothingProductFactory(IProductFactory):
 
     def create_product(self, name: str, price: float, params: ClothingParams) -> ClothingProduct:
         return ClothingProduct(name, price, params.size, params.color)

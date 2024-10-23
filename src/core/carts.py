@@ -1,4 +1,4 @@
-from src.core.products.abstract import Product
+from src.core.products.abstract import IProduct
 
 
 class Cart:
@@ -6,7 +6,7 @@ class Cart:
     def __init__(self):
         self.items = {}
 
-    def add_product(self, product: Product, quantity: int):
+    def add_product(self, product: IProduct, quantity: int):
         init_dict = {"product": product, "quantity": 0}
         self.items.setdefault(product.name, init_dict)["quantity"] += quantity
 

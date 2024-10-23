@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class Product(ABC):
+class IProduct(ABC):
 
     def __init__(self, name: str, price: float):
         self.name = name
@@ -12,10 +12,10 @@ class Product(ABC):
         pass
 
 
-class ProductFactory(ABC):
+class IProductFactory(ABC):
 
     @abstractmethod
-    def create_product(self, name: str, price: float, params) -> Product:
+    def create_product(self, name: str, price: float, params) -> IProduct:
         pass
 
 
