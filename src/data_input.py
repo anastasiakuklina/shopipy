@@ -10,6 +10,29 @@ class ProductEnum(Enum):
     appliance = 2
 
 
+class Mode(Enum):
+    manager = 1
+    customer = 2
+    exit = 3
+
+
+class ManagerActions(Enum):
+    add_product = 1
+    add_quantity = 2
+    display_products = 3
+    switch = 4
+    exit = 5
+
+
+class CustomerActions(Enum):
+    buy_product = 1
+    undo_action = 2
+    display_cart = 3
+    display_products = 4
+    switch = 5
+    exit = 6
+
+
 @dataclass
 class ProductData:
     typ: ProductEnum
@@ -28,6 +51,39 @@ def request_product_price():
 
 def request_product_quantity():
     return int(input("Введите количество товара: "))
+
+
+def request_mode() -> Mode:
+    while True:
+        try:
+            mode = int(input(f"Выберите режим: \n1. менеджер \n2. покупатель \n3. Выйти \n"))
+            return Mode(mode)
+        except ValueError:
+            print("Режим должен быть 1 или 2 или 3")
+
+
+def request_manager_action() -> ManagerActions:
+    while True:
+        try:
+            action = int(input(f"Выберите действие: \n1. Добавить товар \n2. Добавить количество товаров \n3. Просмотреть товары "
+                               f"\n4. Перейти в режим клиента\n5. Выйти\n"))
+            return ManagerActions(action)
+        except ValueError:
+            print(f"Режим должен быть от 1 до {len(ManagerActions)}")
+
+
+def request_customer_action() -> CustomerActions:
+    while True:
+        try:
+            action = int(input(f"Выберите действие: \n1. Купить товар \n2. Отменить действие \n3. Просмотреть корзину "
+                               f"\n4. Просмотреть товары \n5. Перейти в режим менеджера \n6. Выйти\n"))
+            return CustomerActions(action)
+        except ValueError:
+            print(f"Режим должен быть от 1 до {len(CustomerActions)}")
+
+
+def request_customer_name():
+    return input("Введите имя: ")
 
 
 def request_product_type() -> ProductEnum:

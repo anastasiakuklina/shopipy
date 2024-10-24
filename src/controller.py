@@ -13,11 +13,19 @@ class Controller:
 
     def __init__(self):
         self.store = Store()
-        self.customer = Customer("John", self.store)
+        self.customers = {}
+        self.customer = None
         self.store.attach(CustomerNotifier())
         cloth_params = ClothingParams("S", "jeans")
         product = ClothingProductFactory().create_product("jeans", 1000, cloth_params)
         self.store.add_product(product, 10)
+
+    def set_current_customer(self, name: str):
+        if name in self.customers:
+            self.customer = self.customers[name]
+        else:
+            self.customer = Customer(name, self.store)
+            self.customers[name] = self.customer
 
     def add_product(self, product_data: ProductData, quantity: int) -> Result[IProduct, str]:
         match product_data.typ:
