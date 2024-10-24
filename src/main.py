@@ -8,7 +8,8 @@ def main():
     controller = Controller()
     while True:
         print("1. Добавить товар \n2. Просмотреть товары\n3. Купить товар"
-              "\n4. Просмотреть корзину \n5. Добавить количество товаров \n6. Выйти")
+              "\n4. Просмотреть корзину \n5. Отменить последнее действие покупателя \n6. Добавить количество товаров "
+              "\n7. Выйти")
         choice = input("Выберите действие: ")
         if choice == "1":
             product_data, quantity = request_product_data_and_quantity()
@@ -24,11 +25,13 @@ def main():
         elif choice == "4":
             controller.display_cart()
         elif choice == "5":
+            controller.cancel_last_customer_action()
+        elif choice == "6":
             name = request_product_name()
             quantity = request_product_quantity()
             res = controller.add_quantity(name, quantity)
             print(res.err_value) if is_err(res) else None
-        elif choice == "6":
+        elif choice == "7":
             break
         else:
             print("Неверный ввод, попробуйте снова.")

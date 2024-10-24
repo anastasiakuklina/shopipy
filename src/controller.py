@@ -1,6 +1,6 @@
 from result import Result, Err, Ok
 
-from src.core.customers import Customer
+from src.core.customers.customers import Customer
 from src.core.events.observers import CustomerNotifier
 from src.core.products.abstract import IProduct
 from src.core.products.appliance import ApplianceProductFactory
@@ -17,7 +17,7 @@ class Controller:
         self.store.attach(CustomerNotifier())
         cloth_params = ClothingParams("S", "jeans")
         product = ClothingProductFactory().create_product("jeans", 1000, cloth_params)
-        self.store.add_product(product, 5)
+        self.store.add_product(product, 10)
 
     def add_product(self, product_data: ProductData, quantity: int) -> Result[IProduct, str]:
         match product_data.typ:
@@ -49,6 +49,8 @@ class Controller:
         self.store.add_quantity(product, quantity)
         return Ok(None)
 
+    def cancel_last_customer_action(self):
+        self.customer.cancel_last_command()
 
     def display_cart(self):
         self.customer.display_cart()
