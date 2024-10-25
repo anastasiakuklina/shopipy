@@ -3,10 +3,10 @@ from typing import List
 
 from result import Err, Result, Ok
 
-from src.core.customers.carts import Cart
-from src.core.customers.calculators import StandardCalculator, VIPCalculator
-from src.core.customers.commands import AddProductCommand, ICommand
-from src.core.products.abstract import IProduct
+from .carts import Cart
+from .calculators import StandardCalculator, VIPCalculator
+from .commands import AddProductCommand, ICommand
+from src.core.products import IProduct
 from src.core.store import Store
 
 

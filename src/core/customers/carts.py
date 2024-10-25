@@ -1,5 +1,5 @@
-from src.core.customers.calculators import ICalculator
-from src.core.products.abstract import IProduct
+from .calculators import ICalculator
+from src.core.products import IProduct
 
 
 class Cart:

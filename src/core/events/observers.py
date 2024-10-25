@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.core.events.events import BaseEvent, EventEnum, PriceChangedEvent, ProductRestockedEvent
+from .events import BaseEvent, EventEnum, PriceChangedEvent, ProductRestockedEvent
 
 
 class IObserver(ABC):

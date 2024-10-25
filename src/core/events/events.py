@@ -1,8 +1,7 @@
 from abc import abstractmethod
-from datetime import datetime
 from enum import StrEnum
 
-from src.core.products.abstract import IProduct
+from src.core.products import IProduct
 
 
 class EventEnum(StrEnum):

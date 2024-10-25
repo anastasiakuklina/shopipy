@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.core.products.abstract import IProduct, IProductFactory
+from .abstract import IProduct, IProductFactory
 
 
 @dataclass

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from src.core.customers.carts import Cart
-from src.core.products.abstract import IProduct
+from .carts import Cart
+from src.core.products import IProduct
 
 
 class ICommand(ABC):

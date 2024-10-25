@@ -1,14 +1,7 @@
-from dataclasses import dataclass
 from enum import Enum
 
-from src.core.products.appliance import ApplianceParams
-from src.core.products.clothing import ClothingParams
-from src.core.ui.common import request_product_name, request_product_quantity
-
-
-class ProductEnum(Enum):
-    clothing = 1
-    appliance = 2
+from src.core import ProductEnum, ClothingParams, ApplianceParams, ProductData
+from .common import request_product_name, request_product_quantity
 
 
 class ManagerActions(Enum):
@@ -53,14 +46,6 @@ def request_appliance_info() -> ApplianceParams:
     model = input("Введите модель техники: ")
     power = int(input("Введите мощность: "))
     return ApplianceParams(model=model, power=power)
-
-
-@dataclass
-class ProductData:
-    typ: ProductEnum
-    name: str
-    price: float
-    params: ClothingParams | ApplianceParams
 
 
 def request_product_data_and_quantity() -> tuple[ProductData, int]:

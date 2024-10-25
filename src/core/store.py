@@ -1,9 +1,7 @@
 from result import Err, Result, Ok
 
-from src.core.events.abstract_publicator import IPublicator
-from src.core.events.events import BaseEvent, ProductRestockedEvent
-from src.core.events.observers import IObserver
-from src.core.products.abstract import IProduct
+from src.core.events import BaseEvent, IPublicator, IObserver, ProductRestockedEvent
+from src.core.products import IProduct
 from src.utils.singleton import SingletonMeta
 
 

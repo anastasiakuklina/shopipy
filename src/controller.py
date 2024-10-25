@@ -1,12 +1,7 @@
 from result import Result, Err, Ok
 
-from src.core.customers.customers import Customer
-from src.core.events.observers import CustomerNotifier
-from src.core.products.abstract import IProduct
-from src.core.products.appliance import ApplianceProductFactory
-from src.core.products.clothing import ClothingProductFactory, ClothingParams
-from src.core.store import Store
-from src.core.ui.manager import ProductEnum, ProductData
+from src.core import Store, ClothingParams, CustomerNotifier, ClothingProductFactory, Customer, ProductEnum, \
+    ProductData, IProduct, ApplianceProductFactory
 
 
 class Controller:

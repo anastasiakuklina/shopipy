@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from src.core.events.events import BaseEvent
-from src.core.events.observers import IObserver
+from .events import BaseEvent
+from .observers import IObserver
 
 
 class IPublicator(ABC):
