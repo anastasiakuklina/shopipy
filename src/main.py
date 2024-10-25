@@ -1,9 +1,9 @@
-from result import is_ok, is_err
+from result import is_err
 
 from src.controller import Controller
-from src.data_input import request_product_name, request_product_quantity, request_product_data_and_quantity, \
-    request_mode, Mode, request_manager_action, ManagerActions, request_customer_action, CustomerActions, \
-    request_customer_name
+from src.core.ui.common import Mode, request_product_name, request_product_quantity, request_mode
+from src.core.ui.customer import CustomerActions, request_customer_action, request_customer_name
+from src.core.ui.manager import ManagerActions, request_manager_action, request_product_data_and_quantity
 
 
 def run_manager_mode(controller: Controller):

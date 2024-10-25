@@ -21,7 +21,7 @@ class Cart:
         for item in self.items.values():
             print(f"{item['product']} {item['quantity']} шт.")
         total = self.calculate_total()
-        print(total)
+        print(f"Итого: {total}")
 
     def calculate_total(self) -> float:
         return self.calculator.get_total(self.items)
