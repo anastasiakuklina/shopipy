@@ -1,7 +1,16 @@
 from result import Result, Err, Ok
 
-from src.core import Store, ClothingParams, CustomerNotifier, ClothingProductFactory, Customer, ProductEnum, \
-    ProductData, IProduct, ApplianceProductFactory
+from src.core import  (
+    Store,
+    ClothingParams,
+    CustomerNotifier,
+    ClothingProductFactory,
+    Customer,
+    ProductEnum,
+    ProductData,
+    IProduct,
+    ApplianceProductFactory
+)
 
 
 class Controller:
